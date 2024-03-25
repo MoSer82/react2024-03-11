@@ -1,26 +1,19 @@
 import { FC } from "react";
-import { Menus } from "../menus/component";
+import { Menu } from "../menu/component";
 import { Reviews } from "../reviews/components";
-import { MenuItem } from "../menu/component";
-import { ReviewItem } from "../review/component";
+import { RestaurantInterface } from "../../models/restaurant";
 
-export interface RestaurantItem {
-    id: string;
-    name: string;
-    menu: MenuItem[];
-    reviews: ReviewItem[];
+
+interface Props {
+    restaurant: RestaurantInterface | null
 }
 
-interface RestaurantProps {
-    restaurant: RestaurantItem | null
-}
-
-export const Restaurant: FC<RestaurantProps> = ( { restaurant } ) => (
+export const Restaurant: FC<Props> = ( { restaurant } ) => (
     <section>
         <h2>{ (restaurant?.name)? (restaurant.name ) : ('Нет названия') }</h2>
         {
             (restaurant?.menu?.length)? (
-                <Menus menus={ restaurant.menu } />
+                <Menu menu={ restaurant.menu } />
             ) : (
                 <div>Нет меню</div>
             )

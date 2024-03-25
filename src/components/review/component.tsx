@@ -1,17 +1,11 @@
 import { FC } from "react";
+import { ReviewInterface } from "../../models/review";
 
-export interface ReviewItem {
-    id: string;
-    user: string;
-    text: string;
-    rating: number;
+interface Props {
+    review: ReviewInterface;
 }
 
-interface ReviewProps {
-    review: ReviewItem;
-}
-
-export const Review: FC<ReviewProps> = ({ review }) => (
+export const Review: FC<Props> = ({ review }) => (
     <div>
         { review.text }
     </div>

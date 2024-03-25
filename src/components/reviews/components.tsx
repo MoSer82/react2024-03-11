@@ -1,18 +1,19 @@
 import { FC } from "react";
-import { Review, ReviewItem } from "../review/component";
+import { Review } from "../review/component";
+import { ReviewInterface } from "../../models/review";
 
-interface ReviewsProps {
-    reviews: ReviewItem[];
+interface Props {
+    reviews: ReviewInterface[];
 }
 
-export const Reviews: FC<ReviewsProps> = ( { reviews }) => (
+export const Reviews: FC<Props> = ( { reviews }) => (
     <div>
         <h3>Отзывы</h3>
         <ul>
             <li>
                 {
-                    reviews.map((item) => (
-                        <Review review={ item } />
+                    reviews.map(( review ) => (
+                        <Review review={ review } />
                     ))
                 }
                 
