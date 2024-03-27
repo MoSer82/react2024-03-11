@@ -7,16 +7,13 @@ interface Props {
 }
 
 export const Menu: FC<Props> = ({ menu }) => (
-    <div>
-        <h3>Меню</h3>
-        <ul>
-            {
-                menu.map((meal) => (
-                    <li>
-                        <Meal meal={ meal }/>
-                    </li>
-                ))
-            }
-        </ul>
-    </div>
+    <ul>
+        {
+            menu.map((meal) => (
+                <li>
+                    <Meal meal={ meal }/>
+                </li>
+            ))
+        }
+    </ul>
 )

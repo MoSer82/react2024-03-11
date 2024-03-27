@@ -13,14 +13,20 @@ export const Restaurant: FC<Props> = ( { restaurant } ) => (
         <h2>{ (restaurant?.name)? (restaurant.name ) : ('Нет названия') }</h2>
         {
             (restaurant?.menu?.length)? (
-                <Menu menu={ restaurant.menu } />
+                <>
+                    <h3>Меню</h3>
+                    <Menu menu={ restaurant.menu } />
+                </>
             ) : (
                 <div>Нет меню</div>
             )
         }
         {
             (restaurant?.reviews?.length)? (
-                <Reviews reviews={ restaurant.reviews } />
+                <>
+                    <h3>Отзывы</h3>
+                    <Reviews reviews={ restaurant.reviews } />
+                </>
             ): (
                 <div>Нет отзывов</div>
             )

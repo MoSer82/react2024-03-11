@@ -7,17 +7,14 @@ interface Props {
 }
 
 export const Reviews: FC<Props> = ( { reviews }) => (
-    <div>
-        <h3>Отзывы</h3>
-        <ul>
-            <li>
-                {
-                    reviews.map(( review ) => (
-                        <Review review={ review } />
-                    ))
-                }
-                
-            </li>
-        </ul>
-    </div>
+    <ul>
+        <li>
+            {
+                reviews.map(( review ) => (
+                    <Review review={ review } />
+                ))
+            }
+            
+        </li>
+    </ul>
 )
