@@ -11,7 +11,7 @@ export const Menu: FC<Props> = ({ menu }) => (
         {
             menu.map((meal) => (
                 <li>
-                    <Meal meal={ meal }/>
+                    <Meal key={ meal.id } meal={ meal }/>
                 </li>
             ))
         }
