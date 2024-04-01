@@ -21,17 +21,21 @@ export const App = () => {
     }, [currentRestaurantIndex]);
 
     return (
-        (restaurants?.length) ? (
-            <Layout>
-                <RestaurantTabs restaurants={ restaurants } onTabClick={ setCurrentRestaurantIndex } currentIndex={ currentRestaurantIndex } />
+        <Layout>
+            {
+                (restaurants?.length) ? (
+                    <>
+                        <RestaurantTabs restaurants={ restaurants } onTabClick={ setCurrentRestaurantIndex } currentIndex={ currentRestaurantIndex } />
 
-                <Restaurant restaurant={ restaurants[currentRestaurantIndex] } />
-            </Layout>
-        ) : 
-        (
-            <Layout>
-                No info
-            </Layout>
-        )
+                        <Restaurant restaurant={ restaurants[currentRestaurantIndex] } />
+                    </>
+                ) : 
+                (
+                    <>
+                        No info
+                    </>
+                )                
+            }
+        </Layout>
     )
 }
