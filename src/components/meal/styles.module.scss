@@ -1,0 +1,54 @@
+.meal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    padding: 20px 0;
+
+    &_content {
+        text-align: right;
+    }
+
+    &_name {
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    &_ingredients {
+        font-style: italic;
+        font-size: 16px;
+        font-weight: normal;
+        margin-bottom: 20px;
+
+        span:not(:last-child)::after {
+            content: ', ';
+        }
+    }
+
+    &_image {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        max-width: 60%;
+        position: relative;
+        justify-self: start;
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    &.even {
+
+        .meal_image {
+            grid-column-start: 1;
+            grid-column-end: 2;
+            justify-self: end;
+        }
+
+        .meal_content {
+            text-align: left;
+        }
+    }
+}

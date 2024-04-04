@@ -9,7 +9,9 @@ export function Layout({ children }: LayoutProps) {
     return (
         <main>
             <Header />
-            { children }
+            <div className="content">
+                { children }
+            </div>            
             <Footer />
         </main>
     )

@@ -1,0 +1,19 @@
+.list {
+    list-style: none;
+    padding: 0;
+
+    li {
+        padding: 10px 0;
+        position: relative;
+
+        &:not(:last-child)::after {
+            content: '';
+            width: 80%;
+            margin: 20px auto;
+            margin-bottom: 0;
+            height: 1px;
+            background: #43434370;
+            display: block;
+        }
+    }
+}

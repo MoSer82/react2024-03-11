@@ -1,4 +1,5 @@
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler, useContext } from "react";
+import { ThemeContext } from "../../contexts/theme";
 
 interface Props {
     title: string;
@@ -7,7 +8,8 @@ interface Props {
 }
 
 export const Tab: FC<Props> = ({ title, onClick, isActive }) => {
+    const themeName = useContext(ThemeContext);
     return (
-        <button onClick={ onClick } disabled={ isActive }>{ title }</button>
+        <button onClick={ onClick } disabled={ isActive } className={themeName + ' tab_button'}>{ title }</button>
     );
 }

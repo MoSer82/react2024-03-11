@@ -1,17 +1,18 @@
 import { FC } from "react";
 import { Meal } from "../meal/component";
 import { MealInterface } from "../../models/meal";
+import styles from "./styles.module.scss";
 
 interface Props {
-    menu: MealInterface[]
+    menu: MealInterface[];
 }
 
 export const Menu: FC<Props> = ({ menu }) => (
-    <ul>
+    <ul className={styles.menu_list}>
         {
-            menu.map((meal) => (
+            menu.map((meal, index) => (
                 <li>
-                    <Meal key={ meal.id } meal={ meal }/>
+                    <Meal key={ meal.id } meal={ meal } index={ index } />
                 </li>
             ))
         }
