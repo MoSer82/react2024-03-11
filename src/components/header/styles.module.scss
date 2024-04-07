@@ -1,0 +1,42 @@
+.header_btns {
+    display: flex;
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    position: relative;
+    z-index: 5;
+
+    h1 {
+        color: #ffffff;
+        font-size: 64px;
+        font-weight: 700;
+    }
+}
+
+.theme_toggle_button {
+
+    position: absolute;
+    left: 0;
+
+    &:hover {
+        translate: -1% -1%;
+    }
+}
+
+.auth_block {
+    position: absolute;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    right: 0;
+
+    span {
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 700;
+    }
+}

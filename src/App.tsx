@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { restaurants } from "./assets/mock";
 import { Layout } from "./components/layout/component";
 import { RestaurantTabs } from "./components/restaurant-tabs/component";
 import { Restaurant } from "./components/restaurant/component";
-import { ThemeContext } from "./contexts/theme";
-import { AuthContext } from "./contexts/auth";
+import { ThemeContext, useTheme } from "./contexts/theme";
+import { UserContext, useUser } from "./contexts/user";
 
 const getSavedRestaurantIndex = () => {
     return Number(localStorage.getItem('currentRestaurantIndex') || 0);
@@ -17,46 +17,37 @@ const saveRestaurantIndex = (index: number) => {
 export const App = () => {
 
     const [currentRestaurantIndex, setCurrentRestaurantIndex] = useState(getSavedRestaurantIndex);
-    const [theme, setTheme] = useState('dark');
-    const [userName, setUserName] = useState('');
 
     useEffect(() => {
         saveRestaurantIndex(currentRestaurantIndex)
     }, [currentRestaurantIndex]);
 
+    const { theme, toggleTheme } = useTheme();
+    const { user, login, logout } = useUser();
+
+    const themeContextValue = useMemo(() => ({ theme, toggleTheme }), [ theme, toggleTheme ]);
+    const userContextValue = useMemo(() => ({ user, login, logout }), [ user, login, logout ]);
+
     return (
-        <Layout>
-            {
-                (restaurants?.length) ? (
-                    <>
-                        <button className="theme_toggle_button" onClick={() => setTheme( theme === 'dark' ? 'light' : 'dark') }>Тема: { theme }</button>
-                        <ThemeContext.Provider value={ theme }>
-                            <AuthContext.Provider value={ userName }>
-                                {
-                                    userName ? (
-                                        <div className="auth_block">
-                                            <span>{ userName }</span>
-                                            <button className={ theme } onClick={ () => setUserName('') }>Выйти</button>
-                                        </div>
-                                    )  : (
-                                        <div className="auth_block">
-                                            <button className={ theme } onClick={ ()=> setUserName('Sergey') }>Войти</button>
-                                        </div>
-                                    )
-                                }                                
+        <ThemeContext.Provider value={ themeContextValue }>
+            <UserContext.Provider value={ userContextValue }>
+                <Layout>
+                    {
+                        (restaurants?.length) ? (
+                            <>                              
                                 <RestaurantTabs restaurants={ restaurants } onTabClick={ setCurrentRestaurantIndex } currentIndex={ currentRestaurantIndex }/>
 
                                 <Restaurant key={ restaurants[currentRestaurantIndex].id } restaurant={ restaurants[currentRestaurantIndex] } />
-                            </AuthContext.Provider>
-                        </ThemeContext.Provider>
-                    </>
-                ) : 
-                (
-                    <>
-                        No info
-                    </>
-                )
-            }
-        </Layout>
+                            </>
+                        ) : 
+                        (
+                            <>
+                                No info
+                            </>
+                        )
+                    }
+                </Layout>
+            </UserContext.Provider>
+        </ThemeContext.Provider>
     )
 }

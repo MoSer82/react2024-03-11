@@ -1,8 +1,8 @@
-import { FC, ReactNode, useContext } from "react";
+import { FC, ReactNode } from "react";
 import { Counter } from "../counter/component";
 import { useCount } from "../../hooks/useCount";
 import { MealInterface } from "../../models/meal";
-import { AuthContext } from "../../contexts/auth";
+import { useCurrentUser } from "../../contexts/user";
 import styles from "./styles.module.scss";
 import classNames from "classnames";
 
@@ -15,7 +15,7 @@ export interface Props {
 export const Meal: FC<Props> = ({ meal, index }) => {
     const { amount, decrement, increment } = useCount();
 
-    const userName = useContext(AuthContext);
+    const { user } = useCurrentUser();
     return (
         <div className={            
             classNames(
@@ -33,7 +33,7 @@ export const Meal: FC<Props> = ({ meal, index }) => {
                     )) }
                 </div>
                 {
-                    userName ? (
+                    user ? (
                         <Counter currentAmount={ amount } decrement={ decrement } increment={ increment } className={ (index % 2) ? 'odd' : 'even' }/>
                     ) : null
                 }                

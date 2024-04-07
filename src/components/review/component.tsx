@@ -9,6 +9,6 @@ interface Props {
 export const Review: FC<Props> = ({ review }) => (
     <div className={ styles.review_content }>
         <img src="./src/assets/images/avatar.png" alt="avatar" />
-        { review.text }
+        "{ review.text }"
     </div>
 )
