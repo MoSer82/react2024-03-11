@@ -1,0 +1,10 @@
+.review_content {
+    display: flex;
+    gap: 20px;
+    text-align: left;
+    
+    img {
+        max-width: 50px;
+        max-height: 50px;
+    }
+}

@@ -1,0 +1,25 @@
+.counter {
+
+    font-size: 24px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    &.odd {
+        justify-content: flex-end;
+    }
+
+    &.even {
+        justify-content: flex-start;
+    }
+
+    button {
+        padding: 5px 8px;
+        text-align: center;
+        width: 40px;
+        
+        &:hover {
+            translate: -1% -1%;
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Tab } from "../tab/component";
 import { RestaurantInterface } from "../../models/restaurant";
+import "./styles.module.scss";
 
 interface Props {
     restaurants: RestaurantInterface[];
@@ -9,11 +10,11 @@ interface Props {
 }
 export const RestaurantTabs: FC<Props> = ({ restaurants, onTabClick, currentIndex }) => {
     return (
-        <div>
+        <nav>
             { restaurants.map((restaurant, index) => (
                 <Tab title={ restaurant.name } onClick={ () => onTabClick(index) } isActive={ currentIndex === index } />
             ))
             }
-        </div>
+        </nav>
     );
 }

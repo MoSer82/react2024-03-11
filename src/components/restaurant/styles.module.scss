@@ -1,0 +1,71 @@
+.restaurant {
+
+    h2 {
+        font-size: 36px;
+        text-align: center;
+        margin-top: 0;
+
+        &::after {
+            width: 100%;
+            height: 2px;
+            content: '';
+            background: #eac180;
+            display: block;
+            margin: 20px 0;
+        }
+    }
+
+    h3 {
+        font-size: 28px;
+        font-style: italic;
+        text-align: center;
+    }
+
+    &_title {
+        position: relative;
+
+        .reviews {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            right: 10px;
+            text-align: right;
+            font-style: italic;
+            color: #434343;            
+            height: auto;
+            width: 350px;
+            max-width: 50vw;
+            padding: 20px;
+            padding-bottom: 0;
+            background: #ffffff;
+
+            &_link {
+                cursor: pointer;
+
+                &:hover {
+                    color: #eac180;
+                }
+            }
+
+            &_inner {
+                height: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: all ease 0.5s;
+            }
+
+            &.visible {
+                max-height: 40vh;
+                border-radius: 12px;
+                box-shadow: 4px 4px 5px 0px #00000080;
+                padding-bottom: 20px;
+                
+                .reviews_inner {
+                    height: auto;
+                    max-height: 500px;
+                    transition: all ease 0.5s;
+                }
+            }
+        }
+    }
+}
