@@ -11,7 +11,7 @@ const getSavedRestaurantId = () => {
     return localStorage.getItem('currentRestaurantId') || '';
 }
 
-const saveRestaurantIndex = (id: string) => {
+const saveRestaurantId = (id: string) => {
     localStorage.setItem('currentRestaurantId', id);
 }
 
@@ -30,7 +30,7 @@ export const App = () => {
     
 
     useEffect(() => {
-        saveRestaurantIndex(currentRestaurantId)
+        saveRestaurantId(currentRestaurantId)
     }, [currentRestaurantId]);
 
     const { theme, toggleTheme } = useTheme();
