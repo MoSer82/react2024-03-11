@@ -4,3 +4,8 @@ export interface MealInterface {
     price: number;
     ingredients: string[];
 }
+
+export type MealState = {
+    ids: string[];
+    entities: Record<string, MealInterface>
+}

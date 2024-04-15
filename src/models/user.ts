@@ -1,6 +1,9 @@
 export interface UserInterface {
+    id: string;
     name: string;
-    lastname?: string;
-    age?: number;
-    loggedIn: boolean;
+}
+
+export type UserState = {
+    ids: string[];
+    entities: Record<string, UserInterface>
 }
