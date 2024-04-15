@@ -1,26 +1,37 @@
 import { useEffect, useMemo, useState } from "react";
-import { restaurants } from "./assets/mock";
 import { Layout } from "./components/layout/component";
 import { RestaurantTabs } from "./components/restaurant-tabs/component";
 import { Restaurant } from "./components/restaurant/component";
 import { ThemeContext, useTheme } from "./contexts/theme";
 import { UserContext, useUser } from "./contexts/user";
+import { State } from "./redux/state";
+import { useSelector } from "react-redux";
 
-const getSavedRestaurantIndex = () => {
-    return Number(localStorage.getItem('currentRestaurantIndex') || 0);
+const getSavedRestaurantId = () => {
+    return localStorage.getItem('currentRestaurantId') || '';
 }
 
-const saveRestaurantIndex = (index: number) => {
-    localStorage.setItem('currentRestaurantIndex', index.toString());
+const saveRestaurantId = (id: string) => {
+    localStorage.setItem('currentRestaurantId', id);
 }
 
 export const App = () => {
+    
+    const restaurantIds = useSelector<State, string[]>((state) => state.restaurant.ids);
+    const defaultRestaurantId = () => {
+        if (getSavedRestaurantId()) {
+            return getSavedRestaurantId();
+        } else {
+            return restaurantIds[0] ?? null
+        }        
+    };
 
-    const [currentRestaurantIndex, setCurrentRestaurantIndex] = useState(getSavedRestaurantIndex);
+    const [currentRestaurantId, setCurrentRestaurantId] = useState(defaultRestaurantId);
+    
 
     useEffect(() => {
-        saveRestaurantIndex(currentRestaurantIndex)
-    }, [currentRestaurantIndex]);
+        saveRestaurantId(currentRestaurantId)
+    }, [currentRestaurantId]);
 
     const { theme, toggleTheme } = useTheme();
     const { user, login, logout } = useUser();
@@ -32,20 +43,11 @@ export const App = () => {
         <ThemeContext.Provider value={ themeContextValue }>
             <UserContext.Provider value={ userContextValue }>
                 <Layout>
-                    {
-                        (restaurants?.length) ? (
-                            <>                              
-                                <RestaurantTabs restaurants={ restaurants } onTabClick={ setCurrentRestaurantIndex } currentIndex={ currentRestaurantIndex }/>
+                    <>
+                        <RestaurantTabs onTabClick={ setCurrentRestaurantId } currentRestaurantId={ currentRestaurantId }/>
 
-                                <Restaurant key={ restaurants[currentRestaurantIndex].id } restaurant={ restaurants[currentRestaurantIndex] } />
-                            </>
-                        ) : 
-                        (
-                            <>
-                                No info
-                            </>
-                        )
-                    }
+                        { currentRestaurantId && <Restaurant restaurantId={ currentRestaurantId } /> }                        
+                    </>
                 </Layout>
             </UserContext.Provider>
         </ThemeContext.Provider>
